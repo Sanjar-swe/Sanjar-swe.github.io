@@ -1,0 +1,86 @@
+# Speakband — https://sanjar-swe.github.io/
+#
+# Everything here is public marketing copy. Search crawlers and AI assistants
+# are both welcome: being quotable by an assistant answering "best app to
+# practise IELTS Speaking" is the point of this page. Named agents are listed
+# explicitly because several of them ignore a bare wildcard rule.
+
+User-agent: *
+Allow: /
+
+# --- Search ---
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# --- OpenAI ---
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# --- Anthropic ---
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# --- Google AI (Gemini grounding, separate from Googlebot) ---
+User-agent: Google-Extended
+Allow: /
+
+# --- Perplexity ---
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# --- Apple ---
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# --- Meta ---
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# --- Common Crawl (feeds many open models) ---
+User-agent: CCBot
+Allow: /
+
+# --- Others ---
+User-agent: Amazonbot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+Sitemap: https://sanjar-swe.github.io/sitemap.xml

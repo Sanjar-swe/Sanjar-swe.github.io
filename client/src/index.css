@@ -1,0 +1,354 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --font-display: "Inter Tight", "Inter", system-ui, sans-serif;
+}
+
+/* ==========================================================================
+   BRAND
+
+   Teal #0E8C7A + amber #F4A64B, lifted straight from the Android app's
+   launcher mark and in-app palette so the site and the store listing read as
+   one product. Amber is a true accent: it marks the band score and nothing
+   structural — never a large fill.
+   ========================================================================== */
+
+:root {
+  --radius: 0.875rem;
+
+  /* Brand */
+  --primary: oklch(0.55 0.095 176);
+  --primary-foreground: oklch(0.99 0.005 170);
+  --primary-soft: oklch(0.55 0.095 176 / 10%);
+  --accent: oklch(0.78 0.14 68);
+  --accent-foreground: oklch(0.24 0.05 60);
+
+  /* Surface — warm off-white with the faintest mint cast */
+  --background: oklch(0.988 0.004 170);
+  --foreground: oklch(0.19 0.022 190);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.19 0.022 190);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.19 0.022 190);
+
+  /* Supporting */
+  --secondary: oklch(0.955 0.012 175);
+  --secondary-foreground: oklch(0.32 0.03 185);
+  --muted: oklch(0.955 0.008 175);
+  --muted-foreground: oklch(0.505 0.018 190);
+  --destructive: oklch(0.58 0.21 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.905 0.012 178);
+  --input: oklch(0.945 0.008 175);
+  --ring: oklch(0.55 0.095 176);
+
+  /* Ambient wash behind the hero and final CTA */
+  --halo-a: oklch(0.55 0.095 176 / 20%);
+  --halo-b: oklch(0.78 0.14 68 / 16%);
+
+  --chart-1: oklch(0.55 0.095 176);
+  --chart-2: oklch(0.64 0.11 168);
+  --chart-3: oklch(0.72 0.12 120);
+  --chart-4: oklch(0.78 0.14 68);
+  --chart-5: oklch(0.62 0.14 45);
+
+  --shadow-color: 190 25% 20%;
+}
+
+.dark {
+  /* Teal lifts and desaturates on dark so it stays legible without glowing */
+  --primary: oklch(0.74 0.115 172);
+  --primary-foreground: oklch(0.16 0.03 190);
+  --primary-soft: oklch(0.74 0.115 172 / 12%);
+  --accent: oklch(0.80 0.13 70);
+  --accent-foreground: oklch(0.18 0.04 60);
+
+  --background: oklch(0.155 0.018 196);
+  --foreground: oklch(0.945 0.008 180);
+  --card: oklch(0.196 0.021 196);
+  --card-foreground: oklch(0.945 0.008 180);
+  --popover: oklch(0.196 0.021 196);
+  --popover-foreground: oklch(0.945 0.008 180);
+
+  --secondary: oklch(0.245 0.024 194);
+  --secondary-foreground: oklch(0.86 0.012 180);
+  --muted: oklch(0.235 0.02 194);
+  --muted-foreground: oklch(0.665 0.016 185);
+  --destructive: oklch(0.68 0.19 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.315 0.024 194 / 60%);
+  --input: oklch(0.27 0.022 194 / 70%);
+  --ring: oklch(0.74 0.115 172);
+
+  --halo-a: oklch(0.74 0.115 172 / 15%);
+  --halo-b: oklch(0.80 0.13 70 / 10%);
+
+  --chart-1: oklch(0.74 0.115 172);
+  --chart-2: oklch(0.80 0.10 165);
+  --chart-3: oklch(0.82 0.11 125);
+  --chart-4: oklch(0.80 0.13 70);
+  --chart-5: oklch(0.72 0.14 45);
+
+  --shadow-color: 195 40% 3%;
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Anchored sections must clear the fixed navbar */
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Colour only — never animate layout on a theme switch */
+    transition: background-color 240ms ease, color 240ms ease;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.032em;
+    line-height: 1.08;
+    text-wrap: balance;
+    margin-bottom: 0;
+  }
+
+  p {
+    line-height: 1.65;
+    margin-bottom: 0;
+    text-wrap: pretty;
+  }
+
+  /* One visible, consistent focus ring across the whole page */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  a[href] {
+    cursor: pointer;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+}
+
+/* ==========================================================================
+   MOTION POLICY
+
+   Everything here is a short opacity/transform tween. No parallax, no
+   scroll-jacking, no infinite background loops — the brief was "smooth, not
+   dizzying". This block is the hard backstop: a visitor whose OS asks for
+   reduced motion gets a fully static page, with all content still visible.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .container { padding-inline: 2rem; }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-inline: 2.5rem;
+      max-width: 1180px;
+    }
+  }
+
+  .section {
+    padding-block: 5rem;
+  }
+
+  @media (min-width: 768px) {
+    .section { padding-block: 7.5rem; }
+  }
+
+  /* The small uppercase label that sits above every h2 */
+  .kicker {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+
+  /*
+   * Teal → brighter mint, staying inside the green hues. Interpolating the
+   * whole way to the amber accent passes through olive, which reads as muddy
+   * at display sizes — the accent earns its contrast by staying separate.
+   */
+  .brand-text {
+    background: linear-gradient(
+      100deg,
+      var(--primary) 0%,
+      oklch(0.66 0.135 168) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Frosted panel. Falls back to a solid card where backdrop-filter is absent. */
+  .glass {
+    background: color-mix(in oklch, var(--card) 72%, transparent);
+    border: 1px solid color-mix(in oklch, var(--border) 80%, transparent);
+  }
+
+  @supports (backdrop-filter: blur(1px)) {
+    .glass {
+      backdrop-filter: blur(16px) saturate(1.4);
+      -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    }
+  }
+
+  /* Layered soft shadow — reads as depth rather than a drop shadow */
+  .lift {
+    box-shadow:
+      0 1px 2px hsl(var(--shadow-color) / 0.05),
+      0 4px 12px -2px hsl(var(--shadow-color) / 0.06),
+      0 16px 40px -12px hsl(var(--shadow-color) / 0.10);
+  }
+
+  .lift-lg {
+    box-shadow:
+      0 2px 4px hsl(var(--shadow-color) / 0.06),
+      0 10px 28px -6px hsl(var(--shadow-color) / 0.10),
+      0 32px 72px -20px hsl(var(--shadow-color) / 0.18);
+  }
+
+  .glow {
+    box-shadow:
+      0 2px 8px hsl(var(--shadow-color) / 0.10),
+      0 10px 32px -8px color-mix(in oklch, var(--primary) 32%, transparent);
+  }
+
+  /* Hairline grid at very low opacity, purely to break up flat fills */
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, color-mix(in oklch, var(--foreground) 6%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklch, var(--foreground) 6%, transparent) 1px, transparent 1px);
+    background-size: 64px 64px;
+    /* Fade toward the edges so the grid never ends on a hard line */
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 0%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 0%, transparent 100%);
+  }
+
+  /* Static ambient wash. Deliberately not animated. */
+  .halo {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(90px);
+    pointer-events: none;
+  }
+
+  /* Hairline used between sections */
+  .rule {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--border) 15%,
+      var(--border) 85%,
+      transparent
+    );
+  }
+
+  /* Bezel for the real app screenshots */
+  .device {
+    border-radius: 2rem;
+    padding: 0.5rem;
+    background: linear-gradient(
+      160deg,
+      color-mix(in oklch, var(--foreground) 20%, transparent),
+      color-mix(in oklch, var(--foreground) 7%, transparent)
+    );
+    border: 1px solid color-mix(in oklch, var(--border) 90%, transparent);
+  }
+
+  .device > img {
+    border-radius: 1.6rem;
+    display: block;
+    width: 100%;
+  }
+}

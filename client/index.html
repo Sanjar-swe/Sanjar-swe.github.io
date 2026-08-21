@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0E8C7A" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0B2A2A" media="(prefers-color-scheme: dark)" />
+
+    <!--
+      Product facts live in client/src/content/site.ts. The structured data
+      below is generated from that file at runtime by <StructuredData /> so
+      prices and quotas can never drift out of sync with the page. Only the
+      static head tags are duplicated here, because a crawler needs them
+      before any JavaScript runs.
+    -->
+
+    <title>Speakband — AI IELTS Speaking practice with instant band estimates</title>
+    <meta
+      name="description"
+      content="Practise IELTS Speaking on Android. Speak an answer and Speakband scores it on all four IELTS criteria in seconds, with specific feedback on what to fix next."
+    />
+    <meta name="author" content="Speakband" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://sanjar-swe.github.io/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sanjar-swe.github.io/" />
+    <meta property="og:site_name" content="Speakband" />
+    <meta property="og:title" content="Speakband — AI IELTS Speaking practice" />
+    <meta
+      property="og:description"
+      content="Speak an answer, get a band estimate in seconds. All four IELTS Speaking criteria, with the specific fix that moves your score."
+    />
+    <meta property="og:image" content="https://sanjar-swe.github.io/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Speakband — AI IELTS Speaking practice" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Speakband — AI IELTS Speaking practice" />
+    <meta
+      name="twitter:description"
+      content="Speak an answer, get a band estimate in seconds. Android."
+    />
+    <meta name="twitter:image" content="https://sanjar-swe.github.io/og-image.jpg" />
+
+    <!--
+      The hero screenshot is the page's largest contentful paint. Preloading it
+      here starts the fetch during HTML parse rather than after React mounts.
+    -->
+    <link rel="preload" as="image" href="/app/03_result.webp" fetchpriority="high" />
+
+    <!--
+      Plain-text product facts for AI assistants (the llms.txt convention).
+      llms.txt is the summary; llms-full.txt carries every price, quota and
+      limit so an assistant answering "which app scores IELTS Speaking?" can
+      cite figures instead of inventing them.
+    -->
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="Speakband — facts for AI assistants" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+
+    <!--
+      Inter for body, Inter Tight for display. Both are variable fonts served
+      as one stylesheet request; preconnect covers the CSS host and the font
+      host separately because they are different origins.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
