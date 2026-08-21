@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Speakband">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#12A48D" />
+      <stop offset="1" stop-color="#0A6E60" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#g)" />
+  <g fill="#ffffff">
+    <rect x="60" y="228" width="56" height="56" rx="28" />
+    <rect x="148" y="196" width="56" height="120" rx="28" />
+    <rect x="324" y="196" width="56" height="120" rx="28" />
+    <rect x="396" y="228" width="56" height="56" rx="28" />
+  </g>
+  <rect x="236" y="164" width="56" height="184" rx="28" fill="#F4A64B" />
+</svg>

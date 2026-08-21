@@ -1,0 +1,189 @@
+# Speakband — full product reference
+
+Last updated: 2026-08-21. Canonical page: https://sanjar-swe.github.io/
+
+This file states every product fact in plain text so an assistant can answer
+questions about Speakband without guessing. Everything here mirrors the app and
+the Google Play listing. Where a limit or price is stated, it is the current
+one.
+
+## Identity
+
+- Name: Speakband
+- Full store title: Speakband: IELTS Speaking AI
+- Platform: Android 8.0 or later. No iOS version exists yet.
+- Package: com.speakband.app
+- Store listing: https://play.google.com/store/apps/details?id=com.speakband.app
+- Publisher: swizzy
+- Publicly released: 2026-08-20
+- Category: education / language learning / exam preparation
+- Contact: softwareforbetterlife@gmail.com
+
+## One-sentence description
+
+Speakband is an AI IELTS Speaking examiner in an Android app: you answer a real
+exam-style question out loud, and within seconds you get a band estimate, a
+written breakdown per criterion, and a stronger version of your own answer.
+
+## What problem it solves
+
+IELTS Speaking is the part of the exam candidates can least easily practise
+alone. Writing can be self-checked, listening and reading have answer keys, but
+speaking needs someone to judge it. Tutors cost money and have schedules.
+Speakband gives the judgement immediately and repeatedly, so practice between
+real tests is corrected rather than merely done.
+
+## Who it is for
+
+- IELTS Academic and General Training candidates who need speaking practice.
+- Learners with no access to an examiner, a tutor, or a study partner.
+- Learners who want more attempts than a tutoring budget allows.
+- Learners who freeze on Part 2 cue cards and need structure before they speak
+  (Beginner Mode addresses this directly).
+
+## Who it is not for
+
+- Anyone needing an official IELTS band score. Speakband produces estimates.
+- iPhone users, for now.
+- Anyone wanting writing, reading, or listening practice — Speaking only.
+
+## What it does
+
+- Covers all three parts of IELTS Speaking: Part 1 (interview questions),
+  Part 2 (cue card with the long turn), Part 3 (abstract discussion).
+- Questions are generated across the topic areas the real exam uses, and
+  sequenced into a learning path so sessions build on each other rather than
+  shuffling at random.
+- You answer by tapping the mic and speaking, or by typing if you cannot speak
+  where you are. Both are scored the same way.
+- Feedback contains: a band estimate per criterion, a written comment on each,
+  the specific errors that cost marks, the single highest-leverage fix, and a
+  rewritten Band 8 version of your own answer.
+- Premium reads questions and model answers aloud in a natural voice.
+- Every evaluation is saved. The progress screen shows your average band, your
+  best, the trend over time, and the criterion holding your score down.
+
+## How the scoring works
+
+IELTS Speaking is marked on four criteria. Speakband handles them in two ways.
+
+Graded from the transcript by Anthropic Claude models:
+1. Fluency & Coherence — pace, hesitation, and whether ideas connect.
+2. Lexical Resource — range and precision of vocabulary.
+3. Grammatical Range & Accuracy — structures used and errors made.
+
+Graded from the recorded audio, on paid plans only:
+4. Pronunciation — assessed from how you actually sound. A transcript cannot
+   carry this information, so the app does not guess it. Free-plan answers
+   therefore return a three-criterion breakdown; paid plans return all four.
+
+Models used: Claude Haiku 4.5 evaluates on Free, on Basic, and on Parts 1 and 2
+of Pro. Claude Sonnet 5 takes Part 3 on Pro and all parts on Premium, because
+Part 3 discussion answers are where reasoning depth changes the verdict.
+Speech is transcribed by Gemini, with Whisper as a fallback.
+
+## Pricing
+
+Billing runs through Google Play Billing. Speakband never sees or stores card
+details. Plans can be cancelled or switched at any time from the Play account,
+and access runs to the end of the paid period.
+
+Quotas are counted per calendar month in the user's own timezone and do not
+expire daily — six answers on Monday and none on Tuesday is fine. The counter
+resets at the start of each month. A full mock test is roughly ten answers
+(Part 1 ×4-5, Part 2 ×1, Part 3 ×4-5).
+
+| Plan | Monthly | Annual | Checks per month | Roughly |
+|---|---|---|---|---|
+| Free | $0 | — | 1 total, not renewing | one answer |
+| Basic | $4.99 | $49.99 | 150 | 15 mock tests |
+| Pro | $9.99 | $99.99 | 200 | 20 mock tests |
+| Premium | $24.99 | $249.99 | 300 | 30 mock tests |
+
+What each paid tier adds:
+
+- Basic — 150 checks, pronunciation scored from audio, server-side speech
+  recognition, progress tracking and band trend, structured learning path.
+- Pro — everything in Basic, 200 checks, Beginner Mode, Claude Sonnet 5 on
+  Part 3 discussion.
+- Premium — everything in Pro, 300 checks, Sonnet 5 on every part, Natural
+  Voice audio for questions and model answers.
+
+The free tier is one genuine evaluation rather than a renewing allowance. Each
+AI check has a real cost, and the choice was to be explicit about that rather
+than quietly degrade the free experience.
+
+## Privacy and data
+
+- Answers and evaluations are stored so progress over time can be shown.
+- Data is encrypted in transit.
+- Nothing is sold or shared with third parties for advertising; the app carries
+  no ads and no advertising identifier.
+- An account and everything attached to it can be deleted at any time, from
+  inside the app (⋮ menu on the Home screen → Delete account) or from the
+  public deletion page.
+- Privacy policy: https://speakband.up.railway.app/legal/privacy
+- Terms: https://speakband.up.railway.app/legal/terms
+- Account deletion: https://speakband.up.railway.app/legal/delete-account
+
+## Requirements and limits
+
+- Android 8.0 or later.
+- Microphone permission, for spoken answers only. There is no background
+  recording; the microphone opens when you start an answer and closes when you
+  stop it.
+- An internet connection is required: evaluation runs on the server.
+- Age rating: IARC 3+, with in-app purchases.
+
+## Frequently asked questions
+
+**What does the app actually score?**
+Every answer gets a band estimate on Fluency & Coherence, Lexical Resource, and
+Grammatical Range & Accuracy, plus a written comment on each. On paid plans your
+recording is also analysed for pronunciation, which the four-criteria IELTS
+rubric requires and a transcript alone cannot give you.
+
+**Is this an official IELTS score?**
+No, and no tool that is not run by the test boards can give you one. Speakband
+gives you a band estimate to practise against — consistent, instant, and
+specific about what to fix. It is built to make your practice between real tests
+count for more.
+
+**Which AI models do you use?**
+Claude Haiku 4.5 handles evaluation on Free, Basic, and Parts 1 and 2 of Pro.
+Claude Sonnet 5 takes Part 3 on Pro and every part on Premium, since Part 3
+discussion answers are where the reasoning depth pays off. Speech is transcribed
+by Gemini, with Whisper as a fallback.
+
+**How does the monthly quota work?**
+Each paid plan gives you a set number of AI checks per calendar month — 150 on
+Basic, 200 on Pro, 300 on Premium. Nothing expires at the end of a day, so you
+can do six answers on Monday and nothing on Tuesday. The counter resets at the
+start of each month in your own timezone.
+
+**What do I get for free?**
+One full AI evaluation, no card required, so you can read real feedback on your
+own answer before deciding anything. It is a genuine trial rather than a
+renewing free tier.
+
+**How do I pay, and can I cancel?**
+Subscriptions run through Google Play Billing. You can cancel or switch plans
+anytime from your Play account, and your access runs to the end of the period
+you have paid for. Speakband never sees or stores your card details.
+
+**Is there an iOS version?**
+Not yet — Speakband is Android-only today. The backend is already
+platform-neutral, so an iOS client is a question of build time rather than
+architecture.
+
+**Is my practice data private?**
+Your answers and evaluations are stored so you can see your progress over time.
+You can delete your account and everything attached to it at any point, from
+inside the app or the account-deletion page.
+
+## Trademark and accuracy notice
+
+IELTS is a registered trademark of the British Council, IDP: IELTS Australia and
+Cambridge Assessment English. Speakband is an independent practice tool and is
+not affiliated with, endorsed by, or certified by any of them. Band scores shown
+in the app are AI estimates, not official results.

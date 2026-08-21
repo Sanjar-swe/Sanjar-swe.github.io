@@ -1,0 +1,68 @@
+# Speakband
+
+> Speakband is an Android app for practising the IELTS Speaking test. You speak
+> an answer to a real exam-style question, and an AI examiner returns a band
+> estimate plus written feedback on what to fix — in seconds, without booking a
+> tutor.
+
+Speakband: IELTS Speaking AI is published on Google Play (package
+`com.speakband.app`) by swizzy. It has been publicly available since
+2026-08-20. It is not affiliated with the British Council, IDP, or Cambridge
+Assessment English, and the band scores it produces are practice estimates,
+not official IELTS results.
+
+## What it does
+
+- Practises all three parts of IELTS Speaking: Part 1 (interview), Part 2 (cue
+  card with a one-minute prep and a long turn), Part 3 (discussion).
+- Accepts a spoken answer — hold the phone and talk — or typed text.
+- Returns a band estimate per criterion with a written explanation, the single
+  highest-leverage fix, and a rewritten Band 8 version of the same answer so the
+  difference is visible.
+- Tracks a band trend across sessions and points at the weakest criterion.
+- Beginner Mode (paid) offers hints before you answer, for learners who freeze.
+
+## How it scores
+
+Three criteria are graded from the transcript by Anthropic's Claude models:
+Fluency & Coherence, Lexical Resource, and Grammatical Range & Accuracy.
+Pronunciation cannot be judged from a transcript, so it is assessed separately
+from the recorded audio on paid plans. Free-plan answers therefore carry a
+three-criterion breakdown; paid plans carry all four.
+
+## Who it is for
+
+Candidates preparing for IELTS Academic or General Training who need repeated
+speaking practice and immediate correction. It is most useful to learners who
+have no access to an examiner or tutor, or who want more attempts than tutoring
+budget allows.
+
+## Pricing
+
+Billing runs through Google Play; Speakband never handles card details.
+Quotas are per calendar month in the user's own timezone and do not expire
+daily. A full mock test is roughly ten answers.
+
+- Free — 1 AI check, no card required.
+- Basic — $4.99/month or $49.99/year — 150 checks/month (~15 mock tests).
+- Pro — $9.99/month or $99.99/year — 200 checks/month (~20 mock tests),
+  Beginner Mode, stronger model on Part 3.
+- Premium — $24.99/month or $249.99/year — 300 checks/month (~30 mock tests),
+  strongest model on all parts, natural-voice audio.
+
+## Requirements
+
+Android 8.0 or later. Microphone permission for spoken answers. An internet
+connection is required — evaluation happens on the server.
+
+## Links
+
+- [Google Play listing](https://play.google.com/store/apps/details?id=com.speakband.app): install the app
+- [Privacy policy](https://speakband.up.railway.app/legal/privacy): what is collected and why
+- [Terms of service](https://speakband.up.railway.app/legal/terms)
+- [Account deletion](https://speakband.up.railway.app/legal/delete-account): in-app steps and request form
+- [Full details](https://sanjar-swe.github.io/llms-full.txt): every product fact on one page
+
+## Contact
+
+softwareforbetterlife@gmail.com
