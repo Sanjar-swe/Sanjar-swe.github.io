@@ -124,14 +124,15 @@ export const PLANS: Plan[] = [
     name: "Free",
     monthly: 0,
     annual: 0,
-    quota: "1 free evaluation",
-    quotaNote: "One full AI check so you can see the feedback before paying.",
+    quota: "A free first day",
+    quotaNote: "Twelve full AI checks in your first 24 hours, starting when you answer your first question.",
     model: "Claude Haiku 4.5",
     features: [
-      "One AI-scored answer, no card needed",
+      "Twelve AI-scored answers on your first day, no card needed",
       "Full 3-criteria breakdown and feedback",
       "Practice Part 1, Part 2 and Part 3",
       "Speak your answer or type it",
+      "Invite someone who practises and keep one check a day for a month",
     ],
     highlighted: false,
   },
@@ -290,7 +291,7 @@ export const FAQS = [
   },
   {
     q: "What do I get for free?",
-    a: "One full AI evaluation, no card required, so you can read real feedback on your own answer before deciding anything. It is a genuine trial rather than a renewing free tier — the AI cost per check is real and we would rather be straight about that than quietly degrade the free experience.",
+    a: "A free first day: twelve full AI evaluations, no card required. The clock starts when you answer your first question, not when you sign up, so the day is yours to use. It is a genuine trial rather than a renewing free tier — the AI cost per check is real and we would rather be straight about that than quietly degrade the free experience. After it, one check a day stays free for anyone who invites somebody who actually practises.",
   },
   {
     q: "How do I pay, and can I cancel?",
