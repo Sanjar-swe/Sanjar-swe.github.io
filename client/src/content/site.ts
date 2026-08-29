@@ -190,6 +190,39 @@ export const PLANS: Plan[] = [
   },
 ];
 
+/* ──────────────────────── The launch discount ─────────────────────── */
+
+/**
+ * 50% off the first month, mirrored from the app's `promo_campaigns` row.
+ *
+ * **`active` must stay false until the introductory offer actually exists in
+ * Play Console** (offer id `early-bird-50`, 50% off one billing period, on each
+ * monthly base plan). The app has the same rule expressed as code — it draws no
+ * discount unless the store hands back that offer — but this page has no store
+ * to ask, so the rule here is a human one: a landing page promising half price
+ * above a Play listing charging full price is the worst version of this
+ * feature.
+ *
+ * See the app repo: `docs/superpowers/plans/2026-08-29-launch-discounts.md`.
+ */
+export const LAUNCH_DISCOUNT = {
+  // Deliberately typed as a plain boolean rather than the literal `false` an
+  // `as const` would give it: the whole point of this flag is that one word
+  // turns the campaign on, and a literal type makes every branch that reads it
+  // dead code the compiler is entitled to complain about.
+  active: false as boolean,
+  percentOff: 50,
+  badge: "Launch offer",
+  headline: "50% off your first month",
+  body:
+    "We are new, and the first people through the door pay half. One month at half price on any paid plan, then the usual price. Cancel any time.",
+  // The seasonal half of the same campaign, said plainly rather than implied.
+  seasonNote:
+    "After the launch, a half-price fortnight opens every three months.",
+  // Annual is deliberately excluded: the offer is a first-month one.
+  monthlyOnlyNote: "Applied by Google Play at checkout. Monthly plans only.",
+} as const;
+
 /** Shown under the pricing grid. Billing is Play-native — no card ever hits us. */
 export const BILLING_NOTE =
   "Subscriptions are billed through Google Play. Manage or cancel anytime in your Play account — Speakband never handles your card details.";
@@ -297,6 +330,16 @@ export const FAQS = [
     q: "How do I pay, and can I cancel?",
     a: "Subscriptions run through Google Play Billing. You can cancel or switch plans anytime from your Play account, and your access runs to the end of the period you have paid for. Speakband never sees or stores your card details.",
   },
+  // Only while the discount is actually running: an answer about an offer
+  // nobody can take is a question the page invented for itself.
+  ...(LAUNCH_DISCOUNT.active
+    ? [
+        {
+          q: "How does the 50% launch discount work?",
+          a: "Your first month on any paid plan is half price, applied by Google Play at checkout — you will see the discounted figure on the Play payment sheet before you confirm anything. From the second month it renews at the normal price, which is shown on the card before you buy. It applies to monthly plans only, once per account, and you can cancel any time. After the launch, a half-price fortnight opens every three months for anyone who has not subscribed before.",
+        },
+      ]
+    : []),
   {
     q: "Is there an iOS version?",
     a: "Not yet — Speakband is Android-only today. The backend is already platform-neutral, so an iOS client is a question of build time rather than architecture.",

@@ -1,5 +1,11 @@
 import { CTA, SectionHeader } from "@/components/brand/primitives";
-import { BILLING_NOTE, PLANS, PRIMARY_CTA, type Plan } from "@/content/site";
+import {
+  BILLING_NOTE,
+  LAUNCH_DISCOUNT,
+  PLANS,
+  PRIMARY_CTA,
+  type Plan,
+} from "@/content/site";
 import { fadeUp, reveal, stagger } from "@/lib/motion";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
@@ -35,6 +41,42 @@ export function Pricing() {
           }
           body="Every paid plan is a pool of AI checks per month. Nothing expires overnight — use six in one sitting and none the next day."
         />
+
+        {/* The launch discount. Absent entirely until the offer exists in Play
+            Console — see LAUNCH_DISCOUNT. Above the cycle switch, because it
+            applies to one side of that switch and needs to be read first. */}
+        {LAUNCH_DISCOUNT.active && (
+          <motion.div {...reveal()} variants={stagger()} className="mb-10 flex justify-center">
+            <motion.div
+              variants={fadeUp}
+              className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-primary/40 bg-primary p-6 text-primary-foreground lift-lg sm:p-7"
+            >
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="rounded-lg bg-primary-foreground/15 px-2.5 py-1 text-[0.6875rem] font-bold uppercase tracking-wide">
+                  {LAUNCH_DISCOUNT.badge}
+                </span>
+                <span className="text-xl font-bold leading-none">
+                  −{LAUNCH_DISCOUNT.percentOff}%
+                </span>
+              </div>
+              <h3
+                className="mt-4 text-2xl font-bold leading-tight"
+                style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.03em" }}
+              >
+                {LAUNCH_DISCOUNT.headline}
+              </h3>
+              <p className="mt-2.5 text-sm leading-relaxed text-primary-foreground/85">
+                {LAUNCH_DISCOUNT.body}
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-primary-foreground/70">
+                {LAUNCH_DISCOUNT.seasonNote}
+              </p>
+              <p className="mt-4 text-xs text-primary-foreground/60">
+                {LAUNCH_DISCOUNT.monthlyOnlyNote}
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
 
         {/* Billing cycle */}
         <motion.div {...reveal()} variants={stagger()} className="mb-12 flex justify-center">
@@ -75,6 +117,10 @@ export function Pricing() {
           {PLANS.map((plan) => {
             const price = annual ? plan.annual : plan.monthly;
             const perMonth = annual && plan.annual ? (plan.annual / 12).toFixed(2) : null;
+            // Monthly paid plans only: the offer is a first-*month* one, so on
+            // the annual side there is nothing true to say and nothing is said.
+            const discounted =
+              LAUNCH_DISCOUNT.active && !annual && plan.monthly > 0;
 
             return (
               <motion.div
@@ -89,6 +135,11 @@ export function Pricing() {
                 {plan.badge && (
                   <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-primary px-3.5 py-1 text-[0.6875rem] font-bold uppercase tracking-wide text-primary-foreground">
                     {plan.badge}
+                  </span>
+                )}
+                {discounted && (
+                  <span className="absolute right-4 top-4 whitespace-nowrap rounded-full bg-accent px-2.5 py-1 text-[0.6875rem] font-bold text-accent-foreground">
+                    −{LAUNCH_DISCOUNT.percentOff}% first month
                   </span>
                 )}
 
@@ -108,9 +159,18 @@ export function Pricing() {
                     </span>
                   )}
                 </div>
-                {/* Reserved line: keeps every card's price block the same height */}
+                {/* Reserved line: keeps every card's price block the same height.
+                    The discount says *that* the first month is half, never what
+                    half comes to: half of $9.99 is a figure Google rounds its
+                    own way, and a price here that differs from the Play sheet
+                    by a cent is still a price we made up. The app has the same
+                    rule and can go further — it asks the store. */}
                 <p className="min-h-4 text-xs text-muted-foreground">
-                  {perMonth ? `$${perMonth} per month, billed yearly` : ""}
+                  {discounted
+                    ? "First month half price, then the usual price"
+                    : perMonth
+                      ? `$${perMonth} per month, billed yearly`
+                      : ""}
                 </p>
 
                 <div className="mt-5 rounded-xl bg-secondary/60 px-3.5 py-3">
