@@ -22,7 +22,11 @@
  * constant retargets every CTA, badge and JSON-LD availability field at the
  * store listing and drops the early-access section entirely.
  */
-export const LAUNCH_STATE: "early-access" | "public" = "public";
+// Widened deliberately, the same way LAUNCH_DISCOUNT.active is: a `const` is
+// narrowed to its literal even with a union annotation, which turns the
+// early-access branches into dead code the compiler then complains about. The
+// point of the constant is that one word switches the page back.
+export const LAUNCH_STATE = "public" as "early-access" | "public";
 
 export const isEarlyAccess = LAUNCH_STATE === "early-access";
 
@@ -216,9 +220,23 @@ export const LAUNCH_DISCOUNT = {
   headline: "50% off your first month",
   body:
     "We are new, and the first people through the door pay half. One month at half price on any paid plan, then the usual price. Cancel any time.",
-  // The seasonal half of the same campaign, said plainly rather than implied.
-  seasonNote:
-    "After the launch, a half-price fortnight opens every three months.",
+  // The campaign repeats — a half-price window opens again every few months —
+  // and that fact is deliberately NOT on this page. Three reasons, all of them
+  // costing us money if we forget:
+  //
+  //   1. It tells a buyer to come back later instead of buying now. The
+  //      sentence would sit directly above the price it argues against.
+  //   2. It invites a subscriber to cancel and re-enter through the cheap
+  //      door — and that door is shut. Google grants an introductory offer
+  //      only to an account that never subscribed to that base plan, so the
+  //      cancellation loses the subscription and earns no discount. We would
+  //      be advertising a trade the store refuses to honour.
+  //   3. A published cadence is a promise. These campaigns are database rows
+  //      precisely so they can be switched off.
+  //
+  // The window opening again stays a pleasant surprise for whoever is looking
+  // at the page on the day it happens.
+  //
   // Annual is deliberately excluded: the offer is a first-month one.
   monthlyOnlyNote: "Applied by Google Play at checkout. Monthly plans only.",
 } as const;
@@ -336,7 +354,7 @@ export const FAQS = [
     ? [
         {
           q: "How does the 50% launch discount work?",
-          a: "Your first month on any paid plan is half price, applied by Google Play at checkout — you will see the discounted figure on the Play payment sheet before you confirm anything. From the second month it renews at the normal price, which is shown on the card before you buy. It applies to monthly plans only, once per account, and you can cancel any time. After the launch, a half-price fortnight opens every three months for anyone who has not subscribed before.",
+          a: "Your first month on any paid plan is half price, applied by Google Play at checkout — you will see the discounted figure on the Play payment sheet before you confirm anything. From the second month it renews at the normal price, which is shown on the card before you buy. It applies to monthly plans only, once per account, and you can cancel any time.",
         },
       ]
     : []),

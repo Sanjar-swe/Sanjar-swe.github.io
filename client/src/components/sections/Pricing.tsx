@@ -68,9 +68,6 @@ export function Pricing() {
               <p className="mt-2.5 text-sm leading-relaxed text-primary-foreground/85">
                 {LAUNCH_DISCOUNT.body}
               </p>
-              <p className="mt-3 text-sm leading-relaxed text-primary-foreground/70">
-                {LAUNCH_DISCOUNT.seasonNote}
-              </p>
               <p className="mt-4 text-xs text-primary-foreground/60">
                 {LAUNCH_DISCOUNT.monthlyOnlyNote}
               </p>
