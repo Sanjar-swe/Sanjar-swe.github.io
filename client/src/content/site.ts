@@ -6,7 +6,7 @@
  *
  *   quotas / plan gating   backend/services/subscription_service.py
  *                          (PLAN_MONTHLY_QUOTAS, INITIAL_CREDITS, select_model,
- *                           can_use_beginner_mode, can_use_natural_voice)
+ *                           can_use_natural_voice)
  *   prices, annual tiers   docs/superpowers/specs/2026-07-25-monthly-quota-pricing-design.md
  *   copy + legal wording   docs/STORE_LISTING.md
  *
@@ -136,6 +136,7 @@ export const PLANS: Plan[] = [
       "Full 3-criteria breakdown and feedback",
       "Practice Part 1, Part 2 and Part 3",
       "Speak your answer or type it",
+      "Conversation mode — endless practice with no marks in it",
       "Invite someone who practises and keep one check a day for a month",
     ],
     highlighted: false,
@@ -154,6 +155,7 @@ export const PLANS: Plan[] = [
       "Server-side speech recognition",
       "Progress tracking and band trend",
       "Structured learning path",
+      "Questions written from two pages of your own PDF",
     ],
     highlighted: false,
   },
@@ -167,7 +169,6 @@ export const PLANS: Plan[] = [
     model: "Haiku 4.5 · Sonnet 5 on Part 3",
     features: [
       "250 AI checks every month",
-      "Beginner Mode — hints before you answer",
       "Claude Sonnet 5 on Part 3 discussion",
       "Pronunciation scored from your audio",
       "Everything in Basic",
@@ -187,7 +188,6 @@ export const PLANS: Plan[] = [
       "300 AI checks every month",
       "Sonnet 5 on Part 1, 2 and 3",
       "Natural Voice audio for questions and models",
-      "Beginner Mode included",
       "Everything in Pro",
     ],
     highlighted: false,
@@ -259,9 +259,15 @@ export const FEATURES = [
     body: "Paid plans transcribe your recording server-side and score pronunciation from how you actually sound, not from a written transcript.",
   },
   {
+    // Was "Beginner Mode" until 2026-09-04. That feature is gone: the app
+    // stopped offering the escalating hints on 2026-09-02 when Conversation
+    // mode replaced them, and `getBeginnerHint` is declared in
+    // `IeltsApiService.kt` but called from nowhere. `routers/beginner.py`
+    // still answers, purely so v1.0.15 installs keep working. Selling it here
+    // was selling something a new buyer could not find.
     icon: "lightbulb",
-    title: "Beginner Mode",
-    body: "Stuck before you start? Three escalating hint levels — a nudge, a structure, then a full sample answer. Included on Pro and Premium.",
+    title: "Conversation mode",
+    body: "Practice with no marks in it. Everyday openers, corrections as you go, and each next question grown from what you just said — so it never runs out. On every plan.",
   },
   {
     icon: "volume",
