@@ -136,7 +136,12 @@ export const PLANS: Plan[] = [
       "Full 3-criteria breakdown and feedback",
       "Practice Part 1, Part 2 and Part 3",
       "Speak your answer or type it",
-      "Conversation mode — endless practice with no marks in it",
+      // "endless practice" until 2026-09-04, and in the FREE column it read as
+      // unlimited free practice. It is not: a turn costs a third of a check,
+      // out of the same allowance as everything else. What never runs out is
+      // the supply of questions, which is a different promise and is made
+      // properly in the feature card below.
+      "Conversation mode — no marks, three turns per check",
       "Invite someone who practises and keep one check a day for a month",
     ],
     highlighted: false,
@@ -340,7 +345,7 @@ export const FAQS = [
   },
   {
     q: "Which AI models do you use?",
-    a: "Claude Haiku 4.5 handles evaluation on Free, Basic, and Parts 1 and 2 of Pro. Claude Sonnet 5 takes Part 3 on Pro and every part on Premium, since Part 3 discussion answers are where the reasoning depth pays off. Speech is transcribed by Gemini, with Whisper as a fallback.",
+    a: "Claude Haiku 4.5 handles evaluation on Free, Basic, and Parts 1 and 2 of Pro. Claude Sonnet 5 takes Part 3 on Pro and every part on Premium, since Part 3 discussion answers are where the reasoning depth pays off. Speech on paid plans is transcribed by Google's audio model, with Whisper as a fallback; the free tier uses Whisper.",
   },
   {
     q: "How does the monthly quota work?",
