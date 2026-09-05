@@ -1,16 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Speakband">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Speakband">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#12A48D" />
-      <stop offset="1" stop-color="#0A6E60" />
+    <linearGradient id="g" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#14907A" />
+      <stop offset="0.55" stop-color="#0B7A63" />
+      <stop offset="1" stop-color="#08594A" />
     </linearGradient>
   </defs>
-  <rect width="512" height="512" rx="112" fill="url(#g)" />
-  <g fill="#ffffff">
-    <rect x="60" y="228" width="56" height="56" rx="28" />
-    <rect x="148" y="196" width="56" height="120" rx="28" />
-    <rect x="324" y="196" width="56" height="120" rx="28" />
-    <rect x="396" y="228" width="56" height="56" rx="28" />
+  <rect width="240" height="240" rx="54" fill="url(#g)" />
+  <g transform="translate(30,33.75) scale(0.75)">
+    <path
+      d="M 156.45 85.53 A 44.5 44.5 0 1 0 120 104.5 A 44.5 44.5 0 1 1 83.55 174.53 L 66.34 186.57 A 65.5 65.5 0 1 0 120 83.5 A 23.5 23.5 0 1 1 139.25 73.48 Z"
+      fill="#ffffff"
+    />
   </g>
-  <rect x="236" y="164" width="56" height="184" rx="28" fill="#F4A64B" />
 </svg>
