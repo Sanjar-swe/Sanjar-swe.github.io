@@ -75,8 +75,16 @@ export function Hero() {
                   aria-hidden="true"
                 />
               </CTA>
-              <CTA href="#inside" variant="ghost" className="w-full sm:w-auto">
-                See it in the app
+              {/* Second, not first: an install is the better outcome on a
+                  phone. But this page is read on a laptop as often as not, and
+                  "get it on Google Play" is a dead end there. */}
+              <CTA
+                href={LINKS.webApp}
+                external
+                variant="ghost"
+                className="w-full sm:w-auto"
+              >
+                Practise in your browser
               </CTA>
             </motion.div>
 

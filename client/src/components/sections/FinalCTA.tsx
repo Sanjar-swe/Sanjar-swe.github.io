@@ -1,5 +1,5 @@
 import { CTA } from "@/components/brand/primitives";
-import { PLANS, PRIMARY_CTA, isEarlyAccess } from "@/content/site";
+import { LINKS, PLANS, PRIMARY_CTA, isEarlyAccess } from "@/content/site";
 import { fadeUp, reveal, stagger } from "@/lib/motion";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -47,8 +47,15 @@ export function FinalCTA() {
                 aria-hidden="true"
               />
             </CTA>
-            <CTA href="#pricing" variant="ghost" className="w-full sm:w-auto">
-              Compare plans
+            {/* The last thing on the page, and the one somebody on a laptop
+                can actually act on. */}
+            <CTA
+              href={LINKS.webApp}
+              external
+              variant="ghost"
+              className="w-full sm:w-auto"
+            >
+              Practise in your browser
             </CTA>
           </motion.div>
         </motion.div>

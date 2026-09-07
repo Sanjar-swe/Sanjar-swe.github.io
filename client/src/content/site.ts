@@ -53,6 +53,17 @@ export const LINKS = {
   earlyAccess: "https://play.google.com/apps/internaltest/4701561738607985953",
   /** The live store listing — the real CTA target. */
   playStore: `https://play.google.com/store/apps/details?id=${BRAND.packageId}`,
+  /**
+   * The browser version — the same practice screen, served by the API itself
+   * at /app since 2026-09-07.
+   *
+   * Worth a CTA of its own beside the store button, and worth being second to
+   * it: an install is the better outcome when somebody is on a phone, and this
+   * page is read on a laptop as often as not. Six answers free here against
+   * the app's twelve — the difference is deliberate and lives in the backend
+   * (`services/channels.py`), not in any copy on this page.
+   */
+  webApp: `${API}/app/`,
   privacy: `${API}/legal/privacy`,
   terms: `${API}/legal/terms`,
   deleteAccount: `${API}/legal/delete-account`,
