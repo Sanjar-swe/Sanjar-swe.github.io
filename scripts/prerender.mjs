@@ -18,10 +18,12 @@
 import { spawn } from "node:child_process";
 import { createServer } from "node:http";
 import { existsSync } from "node:fs";
-import { readFile, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import { extname, join, normalize } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const DIST = new URL("../dist/public/", import.meta.url).pathname;
+const DIST = fileURLToPath(new URL("../dist/public/", import.meta.url));
 const INDEX = join(DIST, "index.html");
 
 const MIME = {
@@ -41,6 +43,7 @@ const CHROME_CANDIDATES = [
   "/usr/bin/google-chrome",
   "/usr/bin/chromium",
   "/usr/bin/chromium-browser",
+  "C:/Program Files/Google/Chrome/Application/chrome.exe",
 ].filter(Boolean);
 
 function findChrome() {
@@ -57,7 +60,8 @@ function serve() {
   const server = createServer(async (req, res) => {
     // Strip the query string, refuse anything trying to climb out of dist.
     const rel = normalize(decodeURIComponent(req.url.split("?")[0])).replace(/^(\.\.[/\\])+/, "");
-    const file = join(DIST, rel === "/" ? "index.html" : rel);
+    // normalize() turns "/" into "\" on Windows.
+    const file = join(DIST, /^[/\\]$/.test(rel) ? "index.html" : rel);
     if (!file.startsWith(DIST)) {
       res.writeHead(403).end();
       return;
@@ -75,9 +79,12 @@ function serve() {
   });
 }
 
-function dumpDom(chrome, url) {
+function dumpDom(chrome, url, profile) {
   return new Promise((resolve, reject) => {
     const child = spawn(chrome, [
+      // A profile of its own: where Chrome is already open, the default
+      // profile hands the URL to that window and --dump-dom prints nothing.
+      `--user-data-dir=${profile}`,
       "--headless=new",
       "--disable-gpu",
       "--no-sandbox",
@@ -103,7 +110,9 @@ function dumpDom(chrome, url) {
 const { server, port } = await serve();
 try {
   const chrome = findChrome();
-  const html = await dumpDom(chrome, `http://127.0.0.1:${port}/`);
+  const profile = await mkdtemp(join(tmpdir(), "prerender-"));
+  const html = await dumpDom(chrome, `http://127.0.0.1:${port}/`, profile)
+    .finally(() => rm(profile, { recursive: true, force: true }).catch(() => {}));
 
   if (process.env.PRERENDER_DEBUG) {
     await writeFile("/tmp/prerender-dump.html", html);
