@@ -45,10 +45,10 @@ Billing runs through Google Play; Speakband never handles card details.
 Quotas are per calendar month in the user's own timezone and do not expire
 daily. A full mock test is roughly ten answers.
 
-- Free — 1 AI check, no card required.
 Prices are in US dollars; Google Play shows local-currency prices in other
 countries.
 
+- Free — 1 AI check, no card required.
 - Basic — $4.99/month or $39.99/year — 150 checks/month (~15 mock tests).
 - Pro — $9.99/month or $79.99/year — 250 checks/month (~25 mock tests),
   stronger model on Part 3.
