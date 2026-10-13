@@ -59,8 +59,8 @@ export const LINKS = {
    *
    * Worth a CTA of its own beside the store button, and worth being second to
    * it: an install is the better outcome when somebody is on a phone, and this
-   * page is read on a laptop as often as not. Six answers free here against
-   * the app's twelve — the difference is deliberate and lives in the backend
+   * page is read on a laptop as often as not. One free check here, as in the
+   * app (since 2026-09-27) — the size lives in the backend
    * (`services/channels.py`), not in any copy on this page.
    */
   webApp: `${API}/app/`,
@@ -139,11 +139,11 @@ export const PLANS: Plan[] = [
     name: "Free",
     monthly: 0,
     annual: 0,
-    quota: "A free first day",
-    quotaNote: "Twelve full AI checks in your first 24 hours, starting when you answer your first question.",
+    quota: "One free check",
+    quotaNote: "Your first answer gets a full AI check — band, criteria and fixes.",
     model: "Claude Haiku 4.5",
     features: [
-      "Twelve AI-scored answers on your first day, no card needed",
+      "Your first answer AI-scored in full, no card needed",
       "Full 3-criteria breakdown and feedback",
       "Practice Part 1, Part 2 and Part 3",
       "Speak your answer or type it",
@@ -360,11 +360,11 @@ export const FAQS = [
   },
   {
     q: "How does the monthly quota work?",
-    a: "Each paid plan gives you a set number of AI checks per calendar month — 150 on Basic, 200 on Pro, 300 on Premium. Nothing expires at the end of a day, so you can do six answers on Monday and nothing on Tuesday. The counter resets at the start of each month in your own timezone.",
+    a: "Each paid plan gives you a set number of AI checks per calendar month — 150 on Basic, 250 on Pro, 300 on Premium. Nothing expires at the end of a day, so you can do six answers on Monday and nothing on Tuesday. The counter resets at the start of each month in your own timezone.",
   },
   {
     q: "What do I get for free?",
-    a: "A free first day: twelve full AI evaluations, no card required. The clock starts when you answer your first question, not when you sign up, so the day is yours to use. It is a genuine trial rather than a renewing free tier — the AI cost per check is real and we would rather be straight about that than quietly degrade the free experience. After it, one check a day stays free for anyone who invites somebody who actually practises.",
+    a: "One full AI check on your first answer, no card required: the band, the three criteria and the fixes. It is a genuine sample rather than a renewing free tier — the AI cost per check is real and we would rather be straight about that than quietly degrade the free experience. After it, one check a day stays free for anyone who invites somebody who actually practises.",
   },
   {
     q: "How do I pay, and can I cancel?",
