@@ -67,7 +67,7 @@ connection is required — evaluation happens on the server.
 - [Privacy policy](https://speakband.up.railway.app/legal/privacy): what is collected and why
 - [Terms of service](https://speakband.up.railway.app/legal/terms)
 - [Account deletion](https://speakband.up.railway.app/legal/delete-account): in-app steps and request form
-- [Full details](https://sanjar-swe.github.io/llms-full.txt): every product fact on one page
+- [Full details](https://getspeakband.com/llms-full.txt): every product fact on one page
 
 ## Contact
 

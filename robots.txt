@@ -1,4 +1,4 @@
-# Speakband — https://sanjar-swe.github.io/
+# Speakband — https://getspeakband.com/
 #
 # Everything here is public marketing copy. Search crawlers and AI assistants
 # are both welcome: being quotable by an assistant answering "best app to
@@ -83,4 +83,4 @@ Allow: /
 User-agent: Bytespider
 Allow: /
 
-Sitemap: https://sanjar-swe.github.io/sitemap.xml
+Sitemap: https://getspeakband.com/sitemap.xml
