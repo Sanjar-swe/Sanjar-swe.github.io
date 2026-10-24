@@ -3,7 +3,7 @@
 Marketing page for [Speakband: IELTS Speaking AI](https://play.google.com/store/apps/details?id=com.speakband.app),
 an Android app that scores IELTS Speaking answers with an AI examiner.
 
-Live at **https://sanjar-swe.github.io/**
+Live at **https://getspeakband.com/**
 
 ## How it is built
 

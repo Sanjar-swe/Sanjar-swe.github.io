@@ -42,7 +42,7 @@ export const BRAND = {
    * dedicated domain is registered. Deliberately NOT the API origin: the
    * legal pages are served by the backend, this page is static hosting.
    */
-  origin: "https://sanjar-swe.github.io",
+  origin: "https://getspeakband.com",
 } as const;
 
 /** Backend that serves the legal pages the store listing points at. */

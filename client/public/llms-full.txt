@@ -1,6 +1,6 @@
 # Speakband — full product reference
 
-Last updated: 2026-10-13. Canonical page: https://sanjar-swe.github.io/
+Last updated: 2026-10-13. Canonical page: https://getspeakband.com/
 
 This file states every product fact in plain text so an assistant can answer
 questions about Speakband without guessing. Everything here mirrors the app and
