@@ -16,13 +16,13 @@ import { Pricing } from "@/components/sections/Pricing";
  * Section order follows one argument, in order:
  *
  *   Hero          what it does
+ *   Comparison    why this and not the apps people already know
  *   Criteria      what "scored" means here
  *   Features      what you get for that
  *   HowItWorks    what using it costs you in effort
  *   InsideTheApp  proof it exists — real screenshots
  *   DemoWidget    proof the feedback is worth reading
  *   Pricing       what it costs in money
- *   Comparison    what the alternatives do and cost
  *   EarlyAccess   the ask
  *   FAQ           the objections
  *   FinalCTA      the ask again
@@ -44,13 +44,13 @@ export default function Home() {
 
       <main id="main">
         <Hero />
+        <Comparison />
         <Criteria />
         <Features />
         <HowItWorks />
         <InsideTheApp />
         <DemoWidget />
         <Pricing />
-        <Comparison />
         <EarlyAccess />
         <FAQ />
         <FinalCTA />

@@ -82,7 +82,7 @@ export function Comparison() {
   const perCheck = (basic.monthly / BASIC_QUOTA).toFixed(2);
 
   return (
-    <section id="compare" className="section border-y border-border bg-secondary/25">
+    <section id="compare" className="section">
       <div className="container">
         <SectionHeader
           kicker="Compare"
