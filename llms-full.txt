@@ -122,6 +122,24 @@ AI check has a real cost, and the choice was to be explicit about that rather
 than quietly degrade the free experience. After it, one check a day stays free
 for a month for anyone who invites somebody who actually practises.
 
+## Compared with other speaking apps
+
+Competitor prices are US prices as listed in public reviews of each service,
+checked October 2026; local prices differ. Speakband's figures are the Basic
+plan. Only what a public source states is listed.
+
+| | Speakband | ELSA Speak | Speak | Praktika | Cambly |
+|---|---|---|---|---|---|
+| Built for IELTS Speaking | yes | partly (an IELTS section) | no | | no |
+| All three parts of the test | yes | | no | | partly (if the tutor runs them) |
+| IELTS band score | yes, per criterion | partly (a prediction, pronunciation-led) | no | | no |
+| All 4 IELTS criteria scored | yes, 4 of 4 on paid plans | | no | no | no |
+| Feedback seconds after the answer | yes | yes | yes | yes | no (wait for the lesson) |
+| Price per month | $4.99 | $19.99 | $17.99 | | $85 (two 30-minute lessons a week) |
+| Price per year | $39.99 | $159.99 | $83.99 | | |
+| Speakband cheaper, monthly | | 75% | 72% | | 94% |
+| Speakband cheaper, yearly | | 75% | 52% | | |
+
 ## Privacy and data
 
 - Answers and evaluations are stored so progress over time can be shown.
