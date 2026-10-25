@@ -393,3 +393,88 @@ export const FAQS = [
 /** Legally required — Speakband is an independent practice tool. */
 export const IELTS_DISCLAIMER =
   "IELTS is a registered trademark of the British Council, IDP: IELTS Australia and Cambridge Assessment English. Speakband is an independent practice tool and is not affiliated with, endorsed by, or certified by any of them. Band scores shown in the app are AI estimates, not official results.";
+
+/**
+ * Speakband against the apps people name when they ask for an alternative.
+ *
+ * Every cell is something a public source states; where none does, the cell is
+ * null and renders empty — an unknown is never drawn as a cross. Competitor
+ * prices are US store/web prices as published (SpeakShark, checked
+ * 2026-08-28; Leonardo English for Cambly, 2026-04-17); re-check them before
+ * changing a figure, and keep COMPARISON_CHECKED in step.
+ */
+export type Mark = "yes" | "partial" | "no" | null;
+export interface ComparisonCell {
+  mark: Mark;
+  note?: string;
+}
+export interface Competitor {
+  name: string;
+  kind: string;
+  monthly: number | null;
+  annual: number | null;
+}
+
+export const COMPARISON_CHECKED = "October 2026";
+
+export const COMPETITORS: Competitor[] = [
+  { name: "ELSA Speak", kind: "Pronunciation app", monthly: 19.99, annual: 159.99 },
+  { name: "Speak", kind: "Conversation app", monthly: 17.99, annual: 83.99 },
+  { name: "Praktika", kind: "AI tutor app", monthly: null, annual: null },
+  // "Two 30-minute lessons a week" — the plan the source quotes a price for.
+  { name: "Cambly", kind: "Live tutor, 2 lessons/week", monthly: 85, annual: null },
+];
+
+/** Rows of marks: Speakband first, then COMPETITORS in order. */
+export const COMPARISON_ROWS: { label: string; cells: ComparisonCell[] }[] = [
+  {
+    label: "Built for IELTS Speaking",
+    cells: [
+      { mark: "yes" },
+      { mark: "partial", note: "IELTS section" },
+      { mark: "no" },
+      { mark: null },
+      { mark: "no" },
+    ],
+  },
+  {
+    label: "All three parts of the test",
+    cells: [
+      { mark: "yes" },
+      { mark: null },
+      { mark: "no" },
+      { mark: null },
+      { mark: "partial", note: "if your tutor runs them" },
+    ],
+  },
+  {
+    label: "IELTS band score",
+    cells: [
+      { mark: "yes", note: "per criterion" },
+      { mark: "partial", note: "a prediction, pronunciation-led" },
+      { mark: "no" },
+      { mark: null },
+      { mark: "no" },
+    ],
+  },
+  {
+    label: "All 4 IELTS criteria scored",
+    cells: [
+      { mark: "yes", note: "4 of 4 on paid plans" },
+      { mark: null },
+      { mark: "no" },
+      { mark: "no" },
+      { mark: "no" },
+    ],
+  },
+  {
+    label: "Feedback seconds after you answer",
+    cells: [
+      { mark: "yes" },
+      { mark: "yes" },
+      { mark: "yes" },
+      { mark: "yes" },
+      { mark: "no", note: "wait for the lesson" },
+    ],
+  },
+];

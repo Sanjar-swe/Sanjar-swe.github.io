@@ -1,3 +1,4 @@
+import { Comparison } from "@/components/sections/Comparison";
 import { Criteria } from "@/components/sections/Criteria";
 import { DemoWidget } from "@/components/sections/DemoWidget";
 import { EarlyAccess } from "@/components/sections/EarlyAccess";
@@ -21,6 +22,7 @@ import { Pricing } from "@/components/sections/Pricing";
  *   InsideTheApp  proof it exists — real screenshots
  *   DemoWidget    proof the feedback is worth reading
  *   Pricing       what it costs in money
+ *   Comparison    what the alternatives do and cost
  *   EarlyAccess   the ask
  *   FAQ           the objections
  *   FinalCTA      the ask again
@@ -48,6 +50,7 @@ export default function Home() {
         <InsideTheApp />
         <DemoWidget />
         <Pricing />
+        <Comparison />
         <EarlyAccess />
         <FAQ />
         <FinalCTA />
