@@ -153,7 +153,7 @@ export const PLANS: Plan[] = [
       // the supply of questions, which is a different promise and is made
       // properly in the feature card below.
       "Conversation mode — no marks, three turns per check",
-      "Invite someone who practises and keep one check a day for a month",
+      "Invite a friend who practises and get 1 free AI check (up to 10 friends)",
     ],
     highlighted: false,
   },
@@ -364,7 +364,7 @@ export const FAQS = [
   },
   {
     q: "What do I get for free?",
-    a: "One full AI check on your first answer, no card required: the band, the three criteria and the fixes. It is a genuine sample rather than a renewing free tier — the AI cost per check is real and we would rather be straight about that than quietly degrade the free experience. After it, one check a day stays free for anyone who invites somebody who actually practises.",
+    a: "One full AI check on your first answer, no card required: the band, the three criteria and the fixes. It is a genuine sample rather than a renewing free tier — the AI cost per check is real and we would rather be straight about that than quietly degrade the free experience. After it, every friend you invite who answers a first question earns you 1 more free check, for up to 10 friends.",
   },
   {
     q: "How do I pay, and can I cancel?",
