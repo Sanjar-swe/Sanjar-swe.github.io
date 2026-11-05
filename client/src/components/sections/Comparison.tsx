@@ -10,10 +10,8 @@ import { fadeUp, reveal } from "@/lib/motion";
 import { motion } from "framer-motion";
 import { Check, Minus, X } from "lucide-react";
 
-// The cheapest paid plan is the fair one to compare: it is what somebody
-// switching for price would actually buy.
-const basic = PLANS.find((p) => p.id === "basic")!;
-const BASIC_QUOTA = 150;
+// The 30-day pass is the fair one to compare with a month of a subscription.
+const month = PLANS.find((p) => p.id === "pass_30d")!;
 
 /** Rounded down — never round a saving claim upward. */
 function cheaperBy(ours: number, theirs: number | null) {
@@ -50,36 +48,22 @@ function Mark({ cell }: { cell: ComparisonCell }) {
 export function Comparison() {
   const priceRows = [
     {
-      label: "Price per month",
-      ours: money(basic.monthly),
+      label: "Price for a month",
+      ours: money(month.price),
       theirs: COMPETITORS.map((c) => money(c.monthly)),
     },
     {
-      label: "Price per year",
-      ours: money(basic.annual),
-      theirs: COMPETITORS.map((c) => money(c.annual)),
-    },
-    {
-      label: "Speakband is cheaper, monthly",
+      label: "Speakband is cheaper",
       ours: "",
       theirs: COMPETITORS.map((c) => {
-        const p = cheaperBy(basic.monthly, c.monthly);
-        return p == null ? "" : `−${p}%`;
-      }),
-      highlight: true,
-    },
-    {
-      label: "Speakband is cheaper, yearly",
-      ours: "",
-      theirs: COMPETITORS.map((c) => {
-        const p = cheaperBy(basic.annual, c.annual);
+        const p = cheaperBy(month.price, c.monthly);
         return p == null ? "" : `−${p}%`;
       }),
       highlight: true,
     },
   ];
 
-  const perCheck = (basic.monthly / BASIC_QUOTA).toFixed(2);
+  const perCheck = (month.price / month.checks).toFixed(2);
 
   return (
     <section id="compare" className="section">
@@ -91,7 +75,7 @@ export function Comparison() {
               Built for the exam, <span className="brand-text">priced for practice</span>
             </>
           }
-          body={`A band score on every IELTS criterion, seconds after you answer — for $${perCheck} a checked answer on Basic.`}
+          body={`A band score on every IELTS criterion, seconds after you answer — about $${perCheck} a checked answer with a 30-day pass.`}
         />
 
         <motion.div
@@ -175,7 +159,8 @@ export function Comparison() {
           variants={fadeUp}
           className="mx-auto mt-6 max-w-3xl text-center text-xs leading-relaxed text-muted-foreground"
         >
-          Speakband prices are the Basic plan. Competitor prices are US
+          Speakband's price is the one-time 30-day pass; competitors are their
+          monthly subscriptions. Competitor prices are US
           prices as listed in public reviews of each service, checked{" "}
           {COMPARISON_CHECKED}; Cambly is two 30-minute lessons a week. Prices in
           your country may differ. An empty cell means we could not confirm it.

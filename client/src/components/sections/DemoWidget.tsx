@@ -1,7 +1,7 @@
 import { SectionHeader } from "@/components/brand/primitives";
 import { fadeUp, reveal, stagger } from "@/lib/motion";
 import { motion } from "framer-motion";
-import { Lightbulb, Volume2 } from "lucide-react";
+import { Lightbulb } from "lucide-react";
 
 /**
  * A worked example of one evaluation.
@@ -137,11 +137,6 @@ export function DemoWidget() {
                 good effect on my life” becomes “it has made me noticeably more
                 disciplined” — same idea, and the band moves on Lexical Resource
                 alone.
-              </p>
-              <p className="mt-4 flex items-center gap-2 text-[0.8125rem] text-muted-foreground">
-                <Volume2 size={14} className="shrink-0" aria-hidden="true" />
-                Premium reads the band 8 version aloud so you can hear the
-                rhythm, not just read it.
               </p>
             </footer>
           </motion.article>

@@ -47,7 +47,7 @@ export function StructuredData() {
         isAccessibleForFree: true,
         publisher: { "@id": `${BRAND.origin}/#org` },
         description:
-          "AI-powered IELTS Speaking practice. Answers are scored on Fluency & Coherence, Lexical Resource, and Grammatical Range & Accuracy, with pronunciation assessed from recorded audio on paid plans. Band scores are AI estimates for practice, not official IELTS results.",
+          "AI-powered IELTS Speaking practice. Answers are scored on Fluency & Coherence, Lexical Resource, and Grammatical Range & Accuracy, with pronunciation assessed from recorded audio with a pass. Band scores are AI estimates for practice, not official IELTS results.",
         featureList: FEATURES.map((f) => f.title),
         screenshot: SCREENS.map((s) => `${BRAND.origin}${s.src}`),
         inLanguage: "en",
@@ -60,10 +60,10 @@ export function StructuredData() {
         ].join(", "),
         offers: PLANS.map((plan) => ({
           "@type": "Offer",
-          name: `${plan.name} plan`,
-          price: plan.monthly.toFixed(2),
+          name: plan.name,
+          price: plan.price.toFixed(2),
           priceCurrency: "USD",
-          category: plan.monthly === 0 ? "free" : "subscription",
+          category: plan.price === 0 ? "free" : "one-time purchase",
           description: `${plan.quota} — ${plan.quotaNote}`,
           // Closed testing is not general availability; saying otherwise in
           // structured data would be a false signal to the crawler.

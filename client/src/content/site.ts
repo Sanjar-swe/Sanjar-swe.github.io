@@ -4,11 +4,10 @@
  * Every number here is mirrored from the Speakband app repo — do not edit one
  * without checking the other. Provenance for the values that drift most often:
  *
- *   quotas / plan gating   backend/services/subscription_service.py
- *                          (PLAN_MONTHLY_QUOTAS, INITIAL_CREDITS, select_model,
- *                           can_use_natural_voice)
- *   prices, annual tiers   docs/superpowers/specs/2026-07-25-monthly-quota-pricing-design.md
- *   copy + legal wording   docs/STORE_LISTING.md
+ *   passes (days, checks)  backend/services/products.py (PASS_CHECKS, PASS_PLAN)
+ *   free answers           backend/services/channels.py (APP_TRIAL_ANSWERS)
+ *   model per plan         backend/services/subscription_service.py (select_model)
+ *   what may be claimed    docs/SALES_FACTS.md
  *
  * Rule of thumb: if a section component contains a hard-coded price, quota or
  * model name, it is a bug. It belongs here.
@@ -113,12 +112,21 @@ export const CRITERIA = [
 
 /* ───────────────────────────── Pricing ────────────────────────────── */
 
+/**
+ * One-time passes since 2026-11-01 — the monthly and annual subscriptions are
+ * no longer sold. A pass is `days` of Pro plus a fixed number of checks; the
+ * checks stay on the account after the days run out. Prices are the Google
+ * Play US prices of `pass_7d`, `pass_30d`, `pass_60d`.
+ * A full mock test is ~10 answers (Part 1 ×4-5, Part 2 ×1, Part 3 ×4-5).
+ */
 export interface Plan {
-  id: "free" | "basic" | "pro" | "premium";
+  id: "free" | "pass_7d" | "pass_30d" | "pass_60d";
   name: string;
-  monthly: number;
-  annual: number;
-  /** Headline entitlement — the one thing a buyer compares across tiers. */
+  /** One-time price in USD; 0 for free. */
+  price: number;
+  days: number;
+  checks: number;
+  /** Headline entitlement — the one thing a buyer compares across cards. */
   quota: string;
   /** Plain-English translation of the quota. */
   quotaNote: string;
@@ -128,17 +136,21 @@ export interface Plan {
   badge?: string;
 }
 
-/**
- * Quotas are per calendar month in the user's own timezone and do not expire
- * daily — the daily reset was removed in the 2026-07-25 pricing change.
- * A full mock test is ~10 answers (Part 1 ×4-5, Part 2 ×1, Part 3 ×4-5).
- */
+const PASS_FEATURES = [
+  "Pronunciation scored from your audio",
+  "Claude Sonnet 5 on Part 3 discussion",
+  "Server-side speech recognition",
+  "Unused checks stay on your account",
+  "Pay once — nothing renews",
+];
+
 export const PLANS: Plan[] = [
   {
     id: "free",
     name: "Free",
-    monthly: 0,
-    annual: 0,
+    price: 0,
+    days: 0,
+    checks: 1,
     quota: "One free check",
     quotaNote: "Your first answer gets a full AI check — band, criteria and fixes.",
     model: "Claude Haiku 4.5",
@@ -148,118 +160,53 @@ export const PLANS: Plan[] = [
       "Practice Part 1, Part 2 and Part 3",
       "Speak your answer or type it",
       // "endless practice" until 2026-09-04, and in the FREE column it read as
-      // unlimited free practice. It is not: a turn costs a third of a check,
-      // out of the same allowance as everything else. What never runs out is
-      // the supply of questions, which is a different promise and is made
-      // properly in the feature card below.
+      // unlimited free practice. It is not: a turn costs a third of a check.
       "Conversation mode — no marks, three turns per check",
       "Invite a friend who practises and get 1 free AI check (up to 10 friends)",
     ],
     highlighted: false,
   },
   {
-    id: "basic",
-    name: "Basic",
-    monthly: 4.99,
-    annual: 39.99,
-    quota: "150 checks / month",
-    quotaNote: "About 15 full mock tests.",
-    model: "Claude Haiku 4.5",
-    features: [
-      "150 AI checks every month",
-      "Pronunciation scored from your audio",
-      "Server-side speech recognition",
-      "Progress tracking and band trend",
-      "Structured learning path",
-      "Questions written from two pages of your own PDF",
-    ],
+    id: "pass_7d",
+    name: "7-day pass",
+    price: 1.99,
+    days: 7,
+    checks: 30,
+    quota: "30 checks",
+    quotaNote: "About 3 full mock tests.",
+    model: "Haiku 4.5 · Sonnet 5 on Part 3",
+    features: PASS_FEATURES,
     highlighted: false,
   },
   {
-    id: "pro",
-    name: "Pro",
-    monthly: 9.99,
-    annual: 79.99,
-    quota: "250 checks / month",
-    quotaNote: "About 25 full mock tests.",
+    id: "pass_30d",
+    name: "30-day pass",
+    price: 4.99,
+    days: 30,
+    checks: 75,
+    quota: "75 checks",
+    quotaNote: "About 7 full mock tests.",
     model: "Haiku 4.5 · Sonnet 5 on Part 3",
-    features: [
-      "250 AI checks every month",
-      "Claude Sonnet 5 on Part 3 discussion",
-      "Pronunciation scored from your audio",
-      "Everything in Basic",
-    ],
+    features: PASS_FEATURES,
     highlighted: true,
-    badge: "Most popular",
   },
   {
-    id: "premium",
-    name: "Premium",
-    monthly: 19.99,
-    annual: 159.99,
-    quota: "300 checks / month",
-    quotaNote: "About 30 full mock tests — one a day.",
-    model: "Claude Sonnet 5 on all parts",
-    features: [
-      "300 AI checks every month",
-      "Sonnet 5 on Part 1, 2 and 3",
-      "Natural Voice audio for questions and models",
-      "Everything in Pro",
-    ],
+    id: "pass_60d",
+    name: "60-day pass",
+    price: 9.99,
+    days: 60,
+    checks: 150,
+    quota: "150 checks",
+    quotaNote: "About 15 full mock tests.",
+    model: "Haiku 4.5 · Sonnet 5 on Part 3",
+    features: PASS_FEATURES,
     highlighted: false,
   },
 ];
 
-/* ──────────────────────── The launch discount ─────────────────────── */
-
-/**
- * 50% off the first month, mirrored from the app's `promo_campaigns` row.
- *
- * **`active` must stay false until the introductory offer actually exists in
- * Play Console** (offer id `early-bird-50`, 50% off one billing period, on each
- * monthly base plan). The app has the same rule expressed as code — it draws no
- * discount unless the store hands back that offer — but this page has no store
- * to ask, so the rule here is a human one: a landing page promising half price
- * above a Play listing charging full price is the worst version of this
- * feature.
- *
- * See the app repo: `docs/superpowers/plans/2026-08-29-launch-discounts.md`.
- */
-export const LAUNCH_DISCOUNT = {
-  // Deliberately typed as a plain boolean rather than the literal `false` an
-  // `as const` would give it: the whole point of this flag is that one word
-  // turns the campaign on, and a literal type makes every branch that reads it
-  // dead code the compiler is entitled to complain about.
-  active: false as boolean,
-  percentOff: 50,
-  badge: "Launch offer",
-  headline: "50% off your first month",
-  body:
-    "We are new, and the first people through the door pay half. One month at half price on any paid plan, then the usual price. Cancel any time.",
-  // The campaign repeats — a half-price window opens again every few months —
-  // and that fact is deliberately NOT on this page. Three reasons, all of them
-  // costing us money if we forget:
-  //
-  //   1. It tells a buyer to come back later instead of buying now. The
-  //      sentence would sit directly above the price it argues against.
-  //   2. It invites a subscriber to cancel and re-enter through the cheap
-  //      door — and that door is shut. Google grants an introductory offer
-  //      only to an account that never subscribed to that base plan, so the
-  //      cancellation loses the subscription and earns no discount. We would
-  //      be advertising a trade the store refuses to honour.
-  //   3. A published cadence is a promise. These campaigns are database rows
-  //      precisely so they can be switched off.
-  //
-  // The window opening again stays a pleasant surprise for whoever is looking
-  // at the page on the day it happens.
-  //
-  // Annual is deliberately excluded: the offer is a first-month one.
-  monthlyOnlyNote: "Applied by Google Play at checkout. Monthly plans only.",
-} as const;
-
 /** Shown under the pricing grid. Billing is Play-native — no card ever hits us. */
 export const BILLING_NOTE =
-  "Subscriptions are billed through Google Play. Manage or cancel anytime in your Play account — Speakband never handles your card details.";
+  "Passes are one-time purchases through Google Play. Nothing renews and there is nothing to cancel — Speakband never handles your card details.";
 
 /* ───────────────────────────── Sections ───────────────────────────── */
 
@@ -272,7 +219,7 @@ export const FEATURES = [
   {
     icon: "mic",
     title: "Pronunciation from real audio",
-    body: "Paid plans transcribe your recording server-side and score pronunciation from how you actually sound, not from a written transcript.",
+    body: "With a pass, your recording is transcribed server-side and score pronunciation from how you actually sound, not from a written transcript.",
   },
   {
     // Was "Beginner Mode" until 2026-09-04. That feature is gone: the app
@@ -284,11 +231,6 @@ export const FEATURES = [
     icon: "lightbulb",
     title: "Conversation mode",
     body: "Practice with no marks in it. Everyday openers, corrections as you go, and each next question grown from what you just said — so it never runs out. On every plan.",
-  },
-  {
-    icon: "volume",
-    title: "Natural Voice",
-    body: "Premium reads questions and model answers aloud in a natural voice, so you train listening and pronunciation together.",
   },
   {
     icon: "route",
@@ -334,8 +276,8 @@ export const SCREENS = [
   {
     src: "/app/05_band8_sample.webp",
     alt: "Speakband screen showing how a band 8 answer sounds, with audio playback",
-    caption: "Hear the target",
-    body: "A model answer at a higher band, read aloud on Premium.",
+    caption: "See the target",
+    body: "A model answer at a higher band, so you know what to aim for.",
   },
   {
     src: "/app/04_progress.webp",
@@ -348,7 +290,7 @@ export const SCREENS = [
 export const FAQS = [
   {
     q: "What does the app actually score?",
-    a: "Every answer gets a band estimate on Fluency & Coherence, Lexical Resource, and Grammatical Range & Accuracy, plus a written comment on each. On paid plans your recording is also analysed for pronunciation, which the four-criteria IELTS rubric requires and a transcript alone cannot give you.",
+    a: "Every answer gets a band estimate on Fluency & Coherence, Lexical Resource, and Grammatical Range & Accuracy, plus a written comment on each. With a pass your recording is also analysed for pronunciation, which the four-criteria IELTS rubric requires and a transcript alone cannot give you.",
   },
   {
     q: "Is this an official IELTS score?",
@@ -356,11 +298,11 @@ export const FAQS = [
   },
   {
     q: "Which AI models do you use?",
-    a: "Claude Haiku 4.5 handles evaluation on Free, Basic, and Parts 1 and 2 of Pro. Claude Sonnet 5 takes Part 3 on Pro and every part on Premium, since Part 3 discussion answers are where the reasoning depth pays off. Speech on paid plans is transcribed by Google's audio model, with Whisper as a fallback; the free tier uses Whisper.",
+    a: "Claude Haiku 4.5 handles evaluation on the free check and on Parts 1 and 2 with a pass. Claude Sonnet 5 takes Part 3 with a pass, since Part 3 discussion answers are where the reasoning depth pays off. Speech with a pass is transcribed by Google's audio model, with Whisper as a fallback; the free tier uses Whisper.",
   },
   {
-    q: "How does the monthly quota work?",
-    a: "Each paid plan gives you a set number of AI checks per calendar month — 150 on Basic, 250 on Pro, 300 on Premium. Nothing expires at the end of a day, so you can do six answers on Monday and nothing on Tuesday. The counter resets at the start of each month in your own timezone.",
+    q: "How do passes work?",
+    a: "You pay once and get Pro for 7, 30 or 60 days with 30, 75 or 150 AI checks ($1.99, $4.99, $9.99 in the US; Google Play shows your local price). Spend the checks at any pace — six answers on Monday and none on Tuesday is fine. Checks you have not used stay on your account after the days end.",
   },
   {
     q: "What do I get for free?",
@@ -368,18 +310,8 @@ export const FAQS = [
   },
   {
     q: "How do I pay, and can I cancel?",
-    a: "Subscriptions run through Google Play Billing. You can cancel or switch plans anytime from your Play account, and your access runs to the end of the period you have paid for. Speakband never sees or stores your card details.",
+    a: "Passes are one-time purchases through Google Play Billing. Nothing renews, so there is nothing to cancel. Speakband never sees or stores your card details.",
   },
-  // Only while the discount is actually running: an answer about an offer
-  // nobody can take is a question the page invented for itself.
-  ...(LAUNCH_DISCOUNT.active
-    ? [
-        {
-          q: "How does the 50% launch discount work?",
-          a: "Your first month on any paid plan is half price, applied by Google Play at checkout — you will see the discounted figure on the Play payment sheet before you confirm anything. From the second month it renews at the normal price, which is shown on the card before you buy. It applies to monthly plans only, once per account, and you can cancel any time.",
-        },
-      ]
-    : []),
   {
     q: "Is there an iOS version?",
     a: "Not yet — Speakband is Android-only today. The backend is already platform-neutral, so an iOS client is a question of build time rather than architecture.",
@@ -460,7 +392,7 @@ export const COMPARISON_ROWS: { label: string; cells: ComparisonCell[] }[] = [
   {
     label: "All 4 IELTS criteria scored",
     cells: [
-      { mark: "yes", note: "4 of 4 on paid plans" },
+      { mark: "yes", note: "4 of 4 with a pass" },
       { mark: null },
       { mark: "no" },
       { mark: "no" },

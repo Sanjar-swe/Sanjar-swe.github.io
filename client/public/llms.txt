@@ -22,15 +22,15 @@ not official IELTS results.
 - Tracks a band trend across sessions and points at the weakest criterion.
 - Conversation mode: a spoken back-and-forth with no marks, three turns per
   check, open on every plan.
-- Paid plans can turn two pages of your own PDF into practice questions.
+- With a pass you can turn two pages of your own PDF into practice questions.
 
 ## How it scores
 
 Three criteria are graded from the transcript by Anthropic's Claude models:
 Fluency & Coherence, Lexical Resource, and Grammatical Range & Accuracy.
 Pronunciation cannot be judged from a transcript, so it is assessed separately
-from the recorded audio on paid plans. Free-plan answers therefore carry a
-three-criterion breakdown; paid plans carry all four.
+from the recorded audio with a pass. The free check therefore carries a
+three-criterion breakdown; answers with a pass carry all four.
 
 ## Who it is for
 
@@ -42,19 +42,22 @@ budget allows.
 ## Pricing
 
 Billing runs through Google Play; Speakband never handles card details.
-Quotas are per calendar month in the user's own timezone and do not expire
-daily. A full mock test is roughly ten answers.
+Since 2026-11-01 Speakband sells one-time passes, not subscriptions: nothing
+renews and there is nothing to cancel. A pass is Pro for a number of days plus
+a fixed number of AI checks; unused checks stay on the account after the days
+end. A full mock test is roughly ten answers.
 
 Prices are in US dollars; Google Play shows local-currency prices in other
 countries.
 
-- Free — 1 AI check, no card required.
-- Basic — $4.99/month or $39.99/year — 150 checks/month (~15 mock tests).
-- Pro — $9.99/month or $79.99/year — 250 checks/month (~25 mock tests),
-  stronger model on Part 3.
-- Premium — $19.99/month or $159.99/year — 300 checks/month (~30 mock tests),
-  strongest model on all parts, natural-voice audio.
-- Annual plans cost eight months for twelve (33% off in US dollars).
+- Free — 1 AI check, no card required. Each invited friend who answers a first
+  question earns 1 more free check (up to 10 friends).
+- 7-day pass — $1.99 once — 30 checks (~3 mock tests).
+- 30-day pass — $4.99 once — 75 checks (~7 mock tests).
+- 60-day pass — $9.99 once — 150 checks (~15 mock tests).
+
+Every pass includes pronunciation scored from audio, server-side speech
+recognition and Claude Sonnet 5 on Part 3.
 
 ## Requirements
 
